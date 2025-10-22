@@ -38,6 +38,28 @@ app.get("/events", async(req, res) => {
     }
 });
 
+async function findByTite(meetupTitle) {
+    try{
+        const event = await Event.findOne({title: meetupTitle});
+        return event;
+        }catch(error){
+        throw error;
+    }
+}
+
+app.get("/events/:title", async(req, res) => {
+    try{
+        const event = await findByTite(req.params.title);
+        if(event){
+            res.status(200).json({message: "Event get successfully", event: event});
+        }else{
+            res.status(404).json({error: "Not get any event"});
+        }
+    }catch(error){
+        res.status(500).json({message: "Internal server problem"})
+    }
+});
+
 app.listen(PORT, () => {
     console.log("Listening to the port", PORT);
 });
