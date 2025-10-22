@@ -22,3 +22,7 @@ const meetUp = mongoose.Schema({
         type: String,
     },
 });
+
+const Event = mongoose.model("Event", meetUp);
+
+module.exports = Event;
