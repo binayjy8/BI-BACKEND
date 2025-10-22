@@ -5,3 +5,8 @@ const cors = require("cors");
 const PORT = process.env.PORT;
 const { initializeDatabase } = require("./DB/db.connect");
 const Event = require("./models/meetup");
+
+const corsOptions = {
+    origin: "*",
+    credential: true,
+}
