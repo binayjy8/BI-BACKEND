@@ -28,7 +28,7 @@ async function findAllMeetUp() {
 app.get("/events", async(req, res) => {
     try{
         const event = await findAllMeetUp();
-        if(event){
+        if(event.length !== 0){
             res.status(200).json({message: "Events fetched successfully", event: event});
         }else{
             res.status(404).json({error: "Couldn't find any data"});
