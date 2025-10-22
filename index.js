@@ -15,3 +15,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 initializeDatabase();
+
+app.listen(PORT, () => {
+    console.log("Listening to the port", PORT);
+});
