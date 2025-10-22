@@ -25,7 +25,7 @@ async function findAllMeetUp() {
     }
 }
 
-app.get("/all", async(req, res) => {
+app.get("/events", async(req, res) => {
     try{
         const event = await findAllMeetUp();
         if(event){
