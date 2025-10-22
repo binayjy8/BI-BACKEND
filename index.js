@@ -10,3 +10,8 @@ const corsOptions = {
     origin: "*",
     credential: true,
 }
+
+app.use(cors(corsOptions));
+app.use(express.json());
+
+initializeDatabase();
