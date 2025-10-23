@@ -60,6 +60,30 @@ app.get("/events/:title", async(req, res) => {
     }
 });
 
+async function updateOne(name, updatedData){
+    try{
+        const data = await Event.findOneAndUpdate({title: name}, updatedData,{new: true})
+        return data;
+    }catch(error){
+        throw error;
+    }
+}
+
+app.post("/events/:title", async(req, res) => {
+    try{
+        const title = req.params.title;
+        const updatedData = req.body;
+        const event = await updateOne(title, updatedData);
+        if(event){
+            res.status(200).json({message: "Updated successfully", event: event});
+        }else{
+            res.status(404).json({error: "Didn't updated"});
+        }
+    }catch(error){
+        res.status(500).json({message: "Internal server problem"});
+    }
+});
+
 app.listen(PORT, () => {
     console.log("Listening to the port", PORT);
 });
