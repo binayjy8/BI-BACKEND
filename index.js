@@ -86,20 +86,20 @@ app.post("/events/:title", async(req, res) => {
 
 async function getById(eventId){
     try{
-        const event = await Event.findById({id: eventId});
+        const event = await Event.findById(eventId);
         return event;
     }catch(error){
         throw error;
     }
 }
 
-app.get("/events/:eventId", async(req, res) => {
+app.get("/events/env/:eventId", async(req, res) => {
     try{
         const event = await getById(req.params.eventId);
-        if(event){
+        if(event.length !== 0){
             res.status(200).json({message: "Event fetch successfully", event: event});
         }else{
-            res.status(404).json({error: "Could't get event"});
+            res.status(404).json({error: "Event not found"});
         }
     }catch(error){
         res.status(500).json({message: "Internal server problem"});
